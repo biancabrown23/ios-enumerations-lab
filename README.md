@@ -9,15 +9,36 @@ a) Define an enumeration called `iOSDeviceType` with member values `iPhone`, `iP
 
 b) Adjust your code above so that `iPhone` and `iPad` have associated values of type String which represents the model number, eg: `iPhone("6 Plus")`. Use a switch case and let syntax to print out the model number of each device.
 
+enum iOSDeviceType {
+case iPhone (String)
+case iPad 
+case iWatch
+}
+
+let myDevice = iOSDeviceType.iPhone("8+")
+
+switch myDevice {
+case let .iPhone (modelType):
+print("This is an iPhone \(modelType)")
+default: 
+print("I dont know what this device is")
+}
+
 
 ## Question 2
-
 a) Write an enum called `Shape` and give it cases for `triangle`, `rectangle`, `square`, `pentagon`, and `hexagon`.
 
 b) Write a method inside `Shape` that returns how many sides the shape has. Create a variable called `myFavoritePolygon` and assign it to one of the shapes above, then print out how many sides it has.
 
 c) Re-write `Shape` so that each case has an associated value of type Int that will represent the length of the sides (assume the shapes are regular polygons so all the sides are the same length) and write a method inside that returns the perimeter of the shape.
 
+enum Shape: String {
+case triangle
+case rectangle
+case square
+case pentagon
+case hexagon
+}
 
 ## Question 3
 
@@ -47,7 +68,22 @@ var steps: [Direction] = [.up, .up, .left, .down, .left]
 
 // your code here
 ```
+/for direction in steps {
+print("The current location is at x: \(location.x) and y: \(location.y)")
+print("I am about to go \(direction)")
+switch direction {
+case .up:
+location.y += 1
+case .down:
+location.y -= 1
+case .left:
+location.x -= 1
+case .right:
+location.x += 1
+}
+}
 
+print("The final location is: \(location)")
 
 ## Question 5
 
@@ -59,6 +95,41 @@ c) Write a function called `match` that takes two `HandShapes` and returns a `Ma
 
 Hint: Rock beats scissors, paper beats rock, scissor beats paper
 
+enum HandShape {
+case rock
+case paper
+case scissors
+}
+
+enum MatchResult {
+case win
+case draw
+case lose
+}
+
+
+func match(firstShape: HandShape, secondShape: HandShape) -> MatchResult {
+switch firstShape {
+case .rock:
+switch secondShape {
+case .rock: return .draw
+case .paper: return .lose
+case .scissors: return .win
+}
+case .paper:
+switch secondShape {
+case .rock: return .win
+case .paper: return .draw
+case .scissors: return .lose
+}
+case .scissors:
+switch secondShape {
+case .rock: return .lose
+case .paper: return .win
+case .scissors: return .draw
+}
+}
+}
 
 ## Question 6
 
